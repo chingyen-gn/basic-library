@@ -10,7 +10,10 @@ export interface Document {
   isDeleted: boolean;
 }
 
-export type CommandType = "CREATE" | "UPDATE" | "DELETE";
+export type CommandType =
+  | "CreateDocument"
+  | "RenameDocument"
+  | "DeleteDocument";
 
 export interface Command {
   type: CommandType;
@@ -21,7 +24,7 @@ export interface Command {
   };
 }
 
-export type EventType = "CREATE" | "UPDATE" | "DELETE";
+export type EventType = "CreateDocument" | "RenameDocument" | "DeleteDocument";
 
 export interface Event {
   id: string;
@@ -50,19 +53,22 @@ export interface DeleteDocumentArgs {
   documentId: string;
 }
 
-export interface CreateCommand extends Command {
-  type: "CREATE";
+export interface CreateDocumentCommand extends Command {
+  type: "CreateDocument";
   args: CreateDocumentArgs;
 }
 
-export interface UpdateCommand extends Command {
-  type: "UPDATE";
+export interface RenameDocumentCommand extends Command {
+  type: "RenameDocument";
   args: UpdateDocumentArgs;
 }
 
-export interface DeleteCommand extends Command {
-  type: "DELETE";
+export interface DeleteDocumentCommand extends Command {
+  type: "DeleteDocument";
   args: DeleteDocumentArgs;
 }
 
-export type DocumentCommand = CreateCommand | UpdateCommand | DeleteCommand;
+export type DocumentCommand =
+  | CreateDocumentCommand
+  | RenameDocumentCommand
+  | DeleteDocumentCommand;
