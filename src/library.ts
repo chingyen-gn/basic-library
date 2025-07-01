@@ -34,43 +34,6 @@ export class Library {
         //TODO
         console.log(event);
     }
-  
-    // private async fetchEventsFromAPI(): Promise<any> {
-    //   // mock response
-    //   return [
-    //     {
-    //       id: '1',
-    //       deviceId: 'ipad-001',
-    //       logicalClock: 0,
-    //       type: 'CREATE',
-    //       documentId: 'a7f3c9',
-    //       payload: {
-    //         title: 'Music sheet',
-    //         description: "Ed sheeran's song"
-    //       }
-    //     },
-    //     {
-    //       id: "2",
-    //       deviceId: "ipad-001",
-    //       logicalClock: 1,
-    //       type: "UPDATE",
-    //       documentId: "a7f3c9",
-    //       payload: {
-    //         title: "Music sheet - Ed Sheeran"
-    //       }
-    //     },
-    //     {
-    //       id: "3", 
-    //       deviceId: "ipad-001",
-    //       logicalClock: 2,
-    //       type: "DELETE",
-    //       documentId: "a7f3c9",
-    //       payload: {}
-    //     }
-    //   ];
-    //   // const response = await fetch(`/api/events/${this.userId}`);
-    //   // return response.json();
-    // }
 
     getDocuments(): Document[] {
       return Array.from(this.documents.values())
