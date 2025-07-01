@@ -29,8 +29,6 @@ export class Library {
         this.processEvent(event);
       }
     }
-
-
   
     private processEvent(event: Event): void {
         //TODO
