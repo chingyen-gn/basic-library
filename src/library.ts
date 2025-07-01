@@ -1,4 +1,5 @@
 import LogicalClockLWWResolver from "./logicalClockLwwResolver";
+import LogicalClockService from "./logicalClockService";
 import { Event, Document } from "./types";
 
 export class Library {
@@ -6,11 +7,13 @@ export class Library {
   private documents: Map<string, Document> = new Map();
   private apiClient: any;
   private resolver: LogicalClockLWWResolver;
+  private logicalClockService: LogicalClockService;
 
-  constructor(userId: string, apiClient: any) {
+  constructor(userId: string, apiClient: any, logicalClockService: LogicalClockService) {
     this.userId = userId;
     this.apiClient = apiClient;
     this.resolver = new LogicalClockLWWResolver();
+    this.logicalClockService = logicalClockService;
   }
 
   async initialize(): Promise<void> {
@@ -36,6 +39,8 @@ export class Library {
   }
 
   private processEvent(event: Event): void {
+    this.logicalClockService.receiveEvent(event);
+    
     switch (event.type) {
       case 'CreateDocument':
         let title = event.payload.title ?? 'Untitled';

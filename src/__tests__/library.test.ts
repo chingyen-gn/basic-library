@@ -1,4 +1,5 @@
 import { Library } from "../library";
+import LogicalClockService from "../logicalClockService";
 import MockClient from "../mockClient";
 import { Document } from "../types";
 
@@ -7,15 +8,16 @@ import { Document } from "../types";
 describe("Library", () => {
   let library: Library;
   let client: MockClient;
+  let logicalClockService: LogicalClockService;
 
   beforeEach(() => {
     client = new MockClient();
-    library = new Library("test-user-123", client);
+    logicalClockService = new LogicalClockService();
+    library = new Library("test-user-123", client, logicalClockService);
   });
 
   describe("getDocuments", () => {
     it("should return an empty array when no documents exist", () => {
-      library = new Library("test-user-123", new MockClient());
       const result = library.getDocuments();
       expect(result).toEqual([]);
     });
