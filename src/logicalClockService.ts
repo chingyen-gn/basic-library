@@ -8,6 +8,10 @@ class LogicalClockService {
         this.deviceId = this.generateDeviceId();
     }
 
+    receiveEvent(event: Event): void {
+        this.logicalClock = Math.max(this.logicalClock, event.logicalClock);
+    }
+
     generateEvent(command: Command): Event {
         this.logicalClock++;
 
