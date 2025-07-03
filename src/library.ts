@@ -80,7 +80,7 @@ export class Library {
         }
         break;
       default:
-        throw new Error(`Unknown event type: ${event.type}`);
+        console.log(`Unknown event type: ${event.type}, skipping event`);
         break;
     }
   }
