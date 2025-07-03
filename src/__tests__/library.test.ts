@@ -1,20 +1,21 @@
 import { Library } from '../library';
+import MockClient from '../mockClient';
 import { Document } from '../types';
 
-global.fetch = jest.fn();
+// global.fetch = jest.fn();
 
 describe('Library', () => {
   let library: Library;
-  const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
+  let client: MockClient;
 
   beforeEach(() => {
-    library = new Library('test-user-123');
-    library.clearDocuments();
-    mockFetch.mockClear();
+    client = new MockClient();
+    library = new Library('test-user-123', client);
   });
 
   describe('getDocuments', () => {
     it('should return an empty array when no documents exist', () => {
+      library = new Library('test-user-123', new MockClient());
       const result = library.getDocuments();
       expect(result).toEqual([]);
     });
@@ -41,7 +42,7 @@ describe('Library', () => {
       library.addDocument(deletedDoc);
 
       const result = library.getDocuments();
-      
+
       expect(result).toHaveLength(1);
       expect(result[0]).toEqual(activeDoc);
       expect(result.find(doc => doc.isDeleted)).toBeUndefined();
@@ -75,7 +76,7 @@ describe('Library', () => {
       library.addDocument(docM);
 
       const result = library.getDocuments();
-      
+
       expect(result).toHaveLength(3);
       expect(result[0].title).toBe('Apple Document');
       expect(result[1].title).toBe('Mango Document');
@@ -83,4 +84,4 @@ describe('Library', () => {
     });
 
   });
-}); 
+});
