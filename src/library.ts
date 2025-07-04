@@ -35,6 +35,7 @@ export class Library {
     for (const event of events) {
       this.processEvent(event);
     }
+    console.log('');
     console.log('Documents after processing events:', this.documents);
   }
 
