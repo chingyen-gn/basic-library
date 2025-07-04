@@ -6,8 +6,8 @@ import { Library } from './library';
 
 
 const client = new MockClient(mockEvents); 
-const library = new Library("user-1", client);
 const logicalClockService = new LogicalClockService();
+const library = new Library("user-1", client, logicalClockService);
 
 async function main(): Promise<void> {
   await library.initialize();
